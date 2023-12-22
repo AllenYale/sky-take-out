@@ -76,18 +76,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO,employee);
 
-        //设置employee实体类其他属性
-        LocalDateTime now = LocalDateTime.now();
-
-        employee.setCreateTime(now);
-        employee.setUpdateTime(now);
         //设置账号状态，默认启用
         employee.setStatus(StatusConstant.ENABLE);
         //设置密码，默认DEFAULT_PASSWORD
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
-        //从threadLocal获取empId
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+
+        ////需要进行功能字段由aop统一织入处理，eg：creatTime、updateTime、createUser、updateUser
+//        //设置employee实体类其他属性
+//        LocalDateTime now = LocalDateTime.now();
+
+//        employee.setCreateTime(now);
+//        employee.setUpdateTime(now);
+
+//        //从threadLocal获取empId
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
 
         //mapper操作，新增employee记录
         employeeMapper.insert(employee);
