@@ -9,4 +9,16 @@
             (#{flavor.dishId},#{flavor.name},#{flavor.value})
         </foreach>
     </insert>
+
+    <!--/**
+     *  //查询口味详情
+     * @param id
+     * @return
+     */
+    List<DishFlavor> getFlavorByDishId(Long id);-->
+    <select id="getFlavorByDishId" resultType="dishFlavor">
+        select * from dish_flavor where dish_id = #{id}
+    </select>
+
+
 </mapper>
