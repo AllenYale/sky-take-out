@@ -70,8 +70,11 @@ public class DishServiceImpl implements DishService {
      * @return
      */
     public PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO) {
+        log.info("菜品分页：{}",dishPageQueryDTO);
         PageHelper.startPage(dishPageQueryDTO.getPage(), dishPageQueryDTO.getPageSize());
         Page<DishVO> page = dishMapper.pageQuery(dishPageQueryDTO);//后绪步骤实现
+        log.info("菜品分页 page:{}",page);
+        log.info("菜品分页 page.getResult:{}",page.getResult());
         return new PageResult(page.getTotal(), page.getResult());
     }
 
